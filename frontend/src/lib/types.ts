@@ -1,5 +1,5 @@
 // ==========================================
-// InterviewIQ AI — Core Type Definitions
+// InterviewIQ AI — Frontend Type Definitions
 // ==========================================
 
 // ---- User ----
@@ -163,45 +163,4 @@ export interface RoadmapTask {
   completed: boolean;
   description: string;
   estimatedHours: number;
-}
-
-// ---- Analytics ----
-export interface AnalyticsData {
-  totalInterviews: number;
-  averageScore: number;
-  confidenceTrend: number[];
-  strongestTopics: string[];
-  weakestTopics: string[];
-  atsImprovement: number;
-  interviewHistory: InterviewHistoryItem[];
-  scoreBreakdown: FeedbackScores;
-}
-
-export interface InterviewHistoryItem {
-  id: string;
-  date: string;
-  type: InterviewType;
-  score: number;
-  duration: number;
-}
-
-// ---- DSA Tracker ----
-export interface DSAProgress {
-  userId: string;
-  topics: DSATopic[];
-  streak: number;
-  totalSolved: number;
-  lastSolvedAt: string;
-  heatmapData: Record<string, number>; // date -> count
-}
-
-export interface DSATopic {
-  name: string;
-  solved: number;
-  total: number;
-  difficulty: {
-    easy: { solved: number; total: number };
-    medium: { solved: number; total: number };
-    hard: { solved: number; total: number };
-  };
 }

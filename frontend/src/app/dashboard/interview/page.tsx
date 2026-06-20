@@ -20,11 +20,11 @@ export default function InterviewPage() {
 
   const pastInterviews = interviewStore.getAll().filter(i => i.status === 'completed').slice(-5).reverse();
 
-  const handleStart = () => {
+  const handleStart = async () => {
     if (!user) return;
     setStarting(true);
 
-    const greeting = getInterviewGreeting(type, user.targetRole);
+    const greeting = await getInterviewGreeting(type, user.targetRole);
     const interview: Interview = {
       id: generateId('int'),
       userId: user.id,

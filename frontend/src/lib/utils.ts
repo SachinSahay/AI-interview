@@ -1,5 +1,5 @@
 // ==========================================
-// InterviewIQ AI — Utility Functions
+// InterviewIQ AI — Frontend Utility Functions
 // ==========================================
 
 /**
@@ -24,21 +24,6 @@ export function formatDate(dateString: string): string {
 }
 
 /**
- * Format a date string into a relative time string (e.g. "2 hours ago").
- */
-export function timeAgo(dateString: string): string {
-  const now = new Date();
-  const date = new Date(dateString);
-  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-
-  if (seconds < 60) return 'just now';
-  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
-  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
-  if (seconds < 604800) return `${Math.floor(seconds / 86400)}d ago`;
-  return formatDate(dateString);
-}
-
-/**
  * Format seconds into MM:SS or HH:MM:SS.
  */
 export function formatTime(totalSeconds: number): string {
@@ -55,7 +40,7 @@ export function formatTime(totalSeconds: number): string {
 }
 
 /**
- * Get a color class based on a score (0-100).
+ * Get a color based on a score (0-100).
  */
 export function getScoreColor(score: number): string {
   if (score >= 80) return 'var(--accent-success)';
@@ -78,7 +63,7 @@ export function getScoreLabel(score: number): string {
 }
 
 /**
- * Generate a random avatar gradient color pair.
+ * Generate a random avatar gradient color.
  */
 export function getAvatarColor(): string {
   const colors = [
@@ -87,21 +72,6 @@ export function getAvatarColor(): string {
     '#6c5ce7', '#a29bfe',
   ];
   return colors[Math.floor(Math.random() * colors.length)];
-}
-
-/**
- * Truncate text to a max length with ellipsis.
- */
-export function truncate(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  return text.substring(0, maxLength - 3) + '...';
-}
-
-/**
- * Clamp a number between min and max.
- */
-export function clamp(value: number, min: number, max: number): number {
-  return Math.min(Math.max(value, min), max);
 }
 
 /**
@@ -131,13 +101,6 @@ export function getInitials(name: string): string {
 }
 
 /**
- * Class name builder — filters falsy values.
- */
-export function cn(...classes: (string | boolean | undefined | null)[]): string {
-  return classes.filter(Boolean).join(' ');
-}
-
-/**
  * Format file size in human readable form.
  */
 export function formatFileSize(bytes: number): string {
@@ -146,4 +109,23 @@ export function formatFileSize(bytes: number): string {
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+/**
+ * Clamp a score between 0 and 100.
+ */
+export function clampScore(score: number): number {
+  return Math.min(100, Math.max(0, Math.round(score)));
+}
+
+/**
+ * Shuffle an array using Fisher-Yates algorithm.
+ */
+export function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
 }

@@ -51,6 +51,17 @@ export const INTERVIEW_DURATIONS = [
   { value: 60, label: '60 min — Full Interview' },
 ];
 
+// ---- Sidebar Navigation ----
+export const SIDEBAR_NAV = [
+  { href: '/dashboard', label: 'Overview', icon: 'dashboard' },
+  { href: '/dashboard/resume', label: 'Resume', icon: 'resume' },
+  { href: '/dashboard/interview', label: 'Interview', icon: 'interview' },
+  { href: '/dashboard/feedback', label: 'Feedback', icon: 'feedback' },
+  { href: '/dashboard/dsa', label: 'DSA Tracker', icon: 'dsa' },
+  { href: '/dashboard/analytics', label: 'Analytics', icon: 'analytics' },
+  { href: '/dashboard/roadmap', label: 'Roadmap', icon: 'roadmap' },
+] as const;
+
 // ---- Question Banks ----
 export const TECHNICAL_QUESTIONS = {
   easy: [
@@ -147,17 +158,6 @@ export const ROLE_KEYWORDS: Record<string, string[]> = {
     'model deployment', 'data pipeline', 'feature engineering', 'A/B testing',
   ],
 };
-
-// ---- Sidebar Navigation ----
-export const SIDEBAR_NAV = [
-  { href: '/dashboard', label: 'Overview', icon: 'dashboard' },
-  { href: '/dashboard/resume', label: 'Resume', icon: 'resume' },
-  { href: '/dashboard/interview', label: 'Interview', icon: 'interview' },
-  { href: '/dashboard/feedback', label: 'Feedback', icon: 'feedback' },
-  { href: '/dashboard/dsa', label: 'DSA Tracker', icon: 'dsa' },
-  { href: '/dashboard/analytics', label: 'Analytics', icon: 'analytics' },
-  { href: '/dashboard/roadmap', label: 'Roadmap', icon: 'roadmap' },
-] as const;
 
 // ---- Follow-up Prompts ----
 export const FOLLOW_UP_PROMPTS = [

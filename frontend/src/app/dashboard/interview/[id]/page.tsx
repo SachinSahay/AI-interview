@@ -90,8 +90,8 @@ export default function InterviewSession({ params }: { params: Promise<{ id: str
     setIsTyping(true);
     await delay(1200 + Math.random() * 1500);
 
-    const reaction = getInterviewerReaction(answer.length);
-    const nextQ = getNextQuestion(interview.type, interview.difficulty, answeredCount, answer);
+    const reaction = await getInterviewerReaction(answer.length);
+    const nextQ = await getNextQuestion(interview.type, interview.difficulty, answeredCount, answer);
     const nextQuestion = interview.currentQuestion + 1;
 
     const aiMsg: Message = {
