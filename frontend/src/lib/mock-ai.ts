@@ -33,8 +33,9 @@ export async function analyzeResume(
   fileName: string,
   fileSize: number,
   targetRole: string,
+  fileBase64?: string,
 ): Promise<Resume> {
-  return apiCall<Resume>('/resume/analyze', { fileName, fileSize, targetRole });
+  return apiCall<Resume>('/resume/analyze', { fileName, fileSize, targetRole, fileBase64 });
 }
 
 // ---- Interview Question Generation ----
@@ -44,9 +45,10 @@ export async function getNextQuestion(
   difficulty: DifficultyLevel,
   questionIndex: number,
   previousAnswer?: string,
+  targetRole?: string,
 ): Promise<string> {
   const data = await apiCall<{ question: string }>('/interview/question', {
-    type, difficulty, questionIndex, previousAnswer,
+    type, difficulty, questionIndex, previousAnswer, targetRole,
   });
   return data.question;
 }

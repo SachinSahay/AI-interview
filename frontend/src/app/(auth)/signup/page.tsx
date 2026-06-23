@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { TARGET_ROLES, EXPERIENCE_LEVELS } from '@/lib/constants';
 import type { ExperienceLevel } from '@/lib/types';
@@ -18,8 +18,13 @@ export default function SignupPage() {
   const [experience, setExperience] = useState<ExperienceLevel>('fresher');
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/dashboard');
+    }
+  }, [isAuthenticated, router]);
+
   if (isAuthenticated) {
-    router.push('/dashboard');
     return null;
   }
 

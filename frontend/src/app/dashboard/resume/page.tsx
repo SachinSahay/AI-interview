@@ -32,13 +32,29 @@ export default function ResumePage() {
     if (!file || !user) return;
     setAnalyzing(true);
     try {
-      const result = await analyzeResume(file.name, file.size, user.targetRole);
-      resumeStore.add(result);
-      setResume(result);
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          const base64String = (reader.result as string).split(',')[1];
+          const result = await analyzeResume(file.name, file.size, user.targetRole, base64String);
+          resumeStore.add(result);
+          setResume(result);
+        } catch (err) {
+          console.error(err);
+          alert('Analysis failed. Please try again.');
+        } finally {
+          setAnalyzing(false);
+        }
+      };
+      reader.onerror = () => {
+        alert('Failed to read the file.');
+        setAnalyzing(false);
+      };
+      reader.readAsDataURL(file);
     } catch {
       alert('Analysis failed. Please try again.');
+      setAnalyzing(false);
     }
-    setAnalyzing(false);
   };
 
   return (

@@ -91,7 +91,7 @@ export default function InterviewSession({ params }: { params: Promise<{ id: str
     await delay(1200 + Math.random() * 1500);
 
     const reaction = await getInterviewerReaction(answer.length);
-    const nextQ = await getNextQuestion(interview.type, interview.difficulty, answeredCount, answer);
+    const nextQ = await getNextQuestion(interview.type, interview.difficulty, answeredCount, answer, interview.targetRole);
     const nextQuestion = interview.currentQuestion + 1;
 
     const aiMsg: Message = {

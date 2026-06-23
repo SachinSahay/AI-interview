@@ -22,14 +22,14 @@ router.get('/health', (_req: Request, res: Response) => {
 // ---- Resume Analysis ----
 router.post('/resume/analyze', async (req: Request, res: Response) => {
   try {
-    const { fileName, fileSize, targetRole } = req.body;
+    const { fileName, fileSize, targetRole, fileBase64 } = req.body;
 
     if (!fileName || !fileSize || !targetRole) {
       res.status(400).json({ error: 'Missing required fields: fileName, fileSize, targetRole' });
       return;
     }
 
-    const result = await analyzeResume(fileName, fileSize, targetRole);
+    const result = await analyzeResume(fileName, fileSize, targetRole, fileBase64);
     res.json(result);
   } catch (error) {
     console.error('Resume analysis error:', error);
@@ -38,16 +38,16 @@ router.post('/resume/analyze', async (req: Request, res: Response) => {
 });
 
 // ---- Interview Questions ----
-router.post('/interview/question', (req: Request, res: Response) => {
+router.post('/interview/question', async (req: Request, res: Response) => {
   try {
-    const { type, difficulty, questionIndex, previousAnswer } = req.body;
+    const { type, difficulty, questionIndex, previousAnswer, targetRole } = req.body;
 
     if (!type || !difficulty || questionIndex === undefined) {
       res.status(400).json({ error: 'Missing required fields: type, difficulty, questionIndex' });
       return;
     }
 
-    const question = getNextQuestion(type, difficulty, questionIndex, previousAnswer);
+    const question = await getNextQuestion(type, difficulty, questionIndex, previousAnswer, targetRole);
     res.json({ question });
   } catch (error) {
     console.error('Question generation error:', error);
@@ -56,7 +56,7 @@ router.post('/interview/question', (req: Request, res: Response) => {
 });
 
 // ---- Interview Greeting ----
-router.post('/interview/greeting', (req: Request, res: Response) => {
+router.post('/interview/greeting', async (req: Request, res: Response) => {
   try {
     const { type, targetRole } = req.body;
 
@@ -65,7 +65,7 @@ router.post('/interview/greeting', (req: Request, res: Response) => {
       return;
     }
 
-    const greeting = getInterviewGreeting(type, targetRole);
+    const greeting = await getInterviewGreeting(type, targetRole);
     res.json({ greeting });
   } catch (error) {
     console.error('Greeting generation error:', error);
@@ -74,7 +74,7 @@ router.post('/interview/greeting', (req: Request, res: Response) => {
 });
 
 // ---- Interviewer Reaction ----
-router.post('/interview/reaction', (req: Request, res: Response) => {
+router.post('/interview/reaction', async (req: Request, res: Response) => {
   try {
     const { answerLength } = req.body;
 
@@ -83,7 +83,7 @@ router.post('/interview/reaction', (req: Request, res: Response) => {
       return;
     }
 
-    const reaction = getInterviewerReaction(answerLength);
+    const reaction = await getInterviewerReaction(answerLength);
     res.json({ reaction });
   } catch (error) {
     console.error('Reaction generation error:', error);
