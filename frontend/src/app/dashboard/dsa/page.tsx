@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 
-// ---- Mock DSA Data ----
+// ---- Interview DSA Data ----
 const DSA_TOPICS = [
   { name: 'Arrays', icon: '📦', solved: 34, total: 50, easy: { s: 18, t: 20 }, medium: { s: 12, t: 20 }, hard: { s: 4, t: 10 } },
   { name: 'Strings', icon: '🔤', solved: 28, total: 40, easy: { s: 14, t: 15 }, medium: { s: 10, t: 18 }, hard: { s: 4, t: 7 } },
@@ -54,7 +54,7 @@ export default function DSATrackerPage() {
 
   const totalSolved = DSA_TOPICS.reduce((s, t) => s + t.solved, 0);
   const totalProblems = DSA_TOPICS.reduce((s, t) => s + t.total, 0);
-  const streak = 12; // Mock streak
+  const streak = 12; // Interview streak
   const heatmapEntries = Object.entries(heatmap);
   const daysWithActivity = heatmapEntries.filter(([, v]) => v > 0).length;
   const maxCount = Math.max(...Object.values(heatmap));

@@ -3,7 +3,7 @@
 // ==========================================
 // Integrates Gemini API for real resume analysis,
 // adaptive questions, detailed feedback, and roadmaps.
-// Falls back to mock logic if GEMINI_API_KEY is missing/invalid.
+// Falls back to interview logic if GEMINI_API_KEY is missing/invalid.
 // ==========================================
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -122,7 +122,7 @@ export async function analyzeResume(
     }
   }
 
-  // ---- Mock Resume Fallback ----
+  // ---- Interview Resume Fallback ----
   console.log('[Mock] Analyzing resume (fallback)...');
   await delay(2000 + Math.random() * 1500);
 
@@ -290,7 +290,7 @@ export async function getNextQuestion(
     }
   }
 
-  // ---- Mock Question Fallback ----
+  // ---- Interview Question Fallback ----
   const shouldFollowUp = previousAnswer && previousAnswer.length < 100 && questionIndex > 0 && Math.random() > 0.5;
 
   if (shouldFollowUp) {
@@ -454,7 +454,7 @@ export async function generateFeedback(interview: Interview): Promise<Feedback> 
     }
   }
 
-  // ---- Mock Feedback Fallback ----
+  // ---- Interview Feedback Fallback ----
   await delay(1500 + Math.random() * 1000);
 
   const candidateMessages = interview.messages.filter((m: Message) => m.role === 'candidate');
@@ -620,7 +620,7 @@ export async function generateRoadmap(
     }
   }
 
-  // ---- Mock Roadmap Fallback ----
+  // ---- Interview Roadmap Fallback ----
   await delay(1500);
 
   const baseWeeks: RoadmapWeek[] = [

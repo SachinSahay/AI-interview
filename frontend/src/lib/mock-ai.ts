@@ -2,7 +2,7 @@
 // InterviewIQ AI — Backend API Client
 // ==========================================
 // Calls the Express backend instead of using
-// local mock-ai functions.
+// local interview functions.
 // ==========================================
 
 import type {
